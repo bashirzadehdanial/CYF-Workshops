@@ -15,26 +15,6 @@ describe("button and counter", () => {
     container = App();
   });
 
-  test("contains description paragraph with mention of 'increment' in header", () => {
-    expect(
-      container.querySelector("header").querySelector(".increment")
-    ).toHaveTextContent(/increment/i);
-  });
-
-  test("counter starts at 0", () => {
-    expect(getByTestId(container, "counter")).toHaveTextContent(/^0$/);
-  });
-
-  test("pressing Increment increases the counter", () => {
-    const button = getByRole(container, "button", {
-      name: "Increment",
-    });
-    button.click();
-    button.click();
-
-    expect(getByTestId(container, "counter")).toHaveTextContent(/^2$/);
-  });
-
   describe("decrement button", () => {
     test("pressing Decrement decreases the counter", () => {
       const button = getByRole(container, "button", {
@@ -47,9 +27,29 @@ describe("button and counter", () => {
       expect(getByTestId(container, "counter")).toHaveTextContent(/^-3$/);
     });
 
+    test("pressing Increment increases the counter", () => {
+      const button = getByRole(container, "button", {
+        name: "Increment",
+      });
+      button.click();
+      button.click();
+
+      expect(getByTestId(container, "counter")).toHaveTextContent(/^2$/);
+    });
+
+    test("counter starts at 0", () => {
+      expect(getByTestId(container, "counter")).toHaveTextContent(/^0$/);
+    });
+
+    test("contains description paragraph with mention of 'increment' in header", () => {
+      expect(
+        container.querySelector("header").querySelector("p")
+      ).toHaveTextContent(/increment/i);
+    });
+
     test("contains description paragraph with mention of 'decrement' in header", () => {
       expect(
-        container.querySelector("header").querySelector(".decrement")
+        container.querySelector("header").querySelector("p")
       ).toHaveTextContent(/decrement/i);
     });
   });
